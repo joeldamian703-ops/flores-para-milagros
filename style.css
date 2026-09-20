@@ -1,0 +1,1535 @@
+/* ============================================
+   GENERAL
+============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: #654d12;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #fffbdc 0%,
+            #fff2a3 35%,
+            #ffdd65 100%
+        );
+}
+
+
+
+/* ============================================
+   FONDO
+============================================ */
+
+.fondo-luces {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255, 255, 255, 0.7),
+            transparent 18%
+        ),
+
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(255, 255, 255, 0.5),
+            transparent 20%
+        );
+
+}
+
+
+
+/* ============================================
+   CONTENEDOR
+============================================ */
+
+.contenedor {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding: 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+
+.oculto {
+    display: none;
+}
+
+
+
+/* ============================================
+   INICIO
+============================================ */
+
+.inicio {
+
+    width: min(94%, 600px);
+
+    text-align: center;
+
+    padding: 48px 28px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255, 255, 255, 0.72);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+        0 25px 60px
+        rgba(120, 85, 0, 0.18);
+
+    backdrop-filter: blur(10px);
+
+    animation: aparecer 1s ease;
+}
+
+
+
+.decoracion {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    font-size: 35px;
+
+    margin-bottom: 20px;
+}
+
+
+.decoracion span {
+
+    animation:
+        flotar
+        2.5s
+        ease-in-out
+        infinite;
+}
+
+
+.decoracion span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+
+.decoracion span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+
+
+.pequeno-texto {
+
+    color: #9b771b;
+
+    font-size: 0.95rem;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 12px;
+}
+
+
+.inicio h1 {
+
+    font-size:
+        clamp(
+            2.4rem,
+            10vw,
+            4rem
+        );
+
+    color: #785700;
+
+    margin-bottom: 20px;
+}
+
+
+.corazon-titulo {
+
+    display: inline-block;
+
+    animation:
+        latido
+        1.4s
+        infinite;
+}
+
+
+.mensaje-inicial {
+
+    max-width: 470px;
+
+    margin:
+        0 auto
+        30px;
+
+    font-size: 1.05rem;
+
+    line-height: 1.8;
+
+    color: #70571e;
+}
+
+
+.firma-inicial {
+
+    margin-top: 22px;
+
+    color: #927019;
+
+    font-size: 0.95rem;
+}
+
+
+
+/* ============================================
+   BOTONES
+============================================ */
+
+.boton-regalo,
+.boton-sorpresa {
+
+    border: none;
+
+    cursor: pointer;
+
+    padding: 16px 30px;
+
+    border-radius: 999px;
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    color: #624800;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff28b,
+            #ffc928
+        );
+
+    box-shadow:
+        0 12px 30px
+        rgba(171, 120, 0, 0.24);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.boton-regalo:hover,
+.boton-sorpresa:hover {
+
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    box-shadow:
+        0 16px 35px
+        rgba(171, 120, 0, 0.3);
+}
+
+
+.boton-regalo:active,
+.boton-sorpresa:active {
+
+    transform: scale(0.96);
+}
+
+
+
+/* ============================================
+   CARTA
+============================================ */
+
+.regalo {
+
+    width:
+        min(
+            94%,
+            720px
+        );
+
+    text-align: center;
+
+    animation:
+        aparecer
+        0.9s ease;
+}
+
+
+.flores-superiores {
+
+    font-size:
+        clamp(
+            2.6rem,
+            10vw,
+            4.5rem
+        );
+
+    margin-bottom: -30px;
+
+    position: relative;
+
+    z-index: 4;
+}
+
+
+.carta {
+
+    padding: 55px 34px 38px;
+
+    border-radius: 28px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            #ffffff,
+            #fffbed
+        );
+
+    box-shadow:
+        0 22px 60px
+        rgba(119, 84, 0, 0.2);
+}
+
+
+.carta::before {
+
+    content: "🌻";
+
+    position: absolute;
+
+    left: -25px;
+
+    top: -25px;
+
+    font-size: 100px;
+
+    opacity: 0.07;
+}
+
+
+.carta::after {
+
+    content: "🌻";
+
+    position: absolute;
+
+    right: -25px;
+
+    bottom: -25px;
+
+    font-size: 100px;
+
+    opacity: 0.07;
+}
+
+
+.para {
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    color: #a77d13 !important;
+
+    font-size: 0.9rem !important;
+}
+
+
+.carta h2 {
+
+    color: #745400;
+
+    font-size:
+        clamp(
+            1.8rem,
+            7vw,
+            2.7rem
+        );
+
+    margin:
+        10px
+        0
+        28px;
+}
+
+
+.carta p {
+
+    max-width: 560px;
+
+    margin:
+        0 auto
+        18px;
+
+    font-size: 1.05rem;
+
+    line-height: 1.85;
+
+    color: #66501b;
+}
+
+
+
+/* ============================================
+   FRASE
+============================================ */
+
+.frase-especial {
+
+    max-width: 520px;
+
+    margin:
+        28px auto;
+
+    padding: 16px 18px;
+
+    border-radius: 18px;
+
+    font-weight: bold;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff4ae,
+            #ffd84c
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(130, 90, 0, 0.12);
+}
+
+
+.felicitacion {
+
+    margin-top: 30px !important;
+
+    font-size: 1.2rem !important;
+
+    font-weight: bold;
+
+    color: #8b6500 !important;
+}
+
+
+.firma {
+
+    margin-top: 30px;
+
+    line-height: 1.7;
+}
+
+
+.firma strong {
+
+    font-size: 1.5rem;
+
+    color: #654900;
+}
+
+
+.boton-sorpresa {
+
+    margin-top: 28px;
+}
+
+
+
+/* ============================================
+   FINAL
+============================================ */
+
+.sorpresa-final {
+
+    width:
+        min(
+            94%,
+            650px
+        );
+
+    padding: 42px 26px 35px;
+
+    text-align: center;
+
+    border-radius: 32px;
+
+    background:
+        rgba(255, 255, 255, 0.78);
+
+    box-shadow:
+        0 25px 65px
+        rgba(120, 85, 0, 0.20);
+
+    backdrop-filter:
+        blur(10px);
+
+    animation:
+        aparecer
+        0.9s ease;
+}
+
+
+.corazon {
+
+    font-size: 65px;
+
+    animation:
+        latido
+        1.3s
+        infinite;
+}
+
+
+.detalle-final {
+
+    color: #9d7615;
+
+    margin-top: 8px;
+
+    font-size: 0.9rem;
+}
+
+
+.sorpresa-final h2 {
+
+    font-size:
+        clamp(
+            2rem,
+            8vw,
+            3.3rem
+        );
+
+    color: #745500;
+
+    margin:
+        8px
+        0
+        14px;
+}
+
+
+.texto-final {
+
+    max-width: 480px;
+
+    margin: auto;
+
+    line-height: 1.8;
+
+    color: #70571b;
+}
+
+
+
+/* ============================================
+   RAMO
+============================================ */
+
+.ramo-amarillo {
+
+    width: 300px;
+
+    height: 340px;
+
+    margin:
+        18px auto
+        20px;
+
+    position: relative;
+
+    transform-origin:
+        bottom center;
+
+    animation:
+        aparecerRamo
+        1.3s
+        cubic-bezier(
+            .15,
+            .8,
+            .25,
+            1.2
+        )
+        forwards,
+        moverRamo
+        3s
+        ease-in-out
+        1.5s
+        infinite;
+}
+
+
+
+.flores-ramo {
+
+    position: absolute;
+
+    width: 100%;
+
+    height: 220px;
+
+    top: 0;
+
+    left: 0;
+
+    z-index: 6;
+}
+
+
+.flor {
+
+    position: absolute;
+
+    font-size: 62px;
+
+    opacity: 0;
+
+    transform: scale(0);
+
+    filter:
+        drop-shadow(
+            0 8px 6px
+            rgba(90, 65, 0, 0.18)
+        );
+
+    animation:
+        florecer
+        0.8s
+        ease
+        forwards;
+}
+
+
+
+.f1 {
+
+    left: 8px;
+
+    top: 95px;
+
+    animation-delay: 0.2s;
+}
+
+
+.f2 {
+
+    left: 48px;
+
+    top: 45px;
+
+    animation-delay: 0.35s;
+}
+
+
+.f3 {
+
+    left: 112px;
+
+    top: 7px;
+
+    animation-delay: 0.5s;
+}
+
+
+.f4 {
+
+    right: 47px;
+
+    top: 45px;
+
+    animation-delay: 0.65s;
+}
+
+
+.f5 {
+
+    right: 7px;
+
+    top: 95px;
+
+    animation-delay: 0.8s;
+}
+
+
+.f6 {
+
+    left: 57px;
+
+    top: 115px;
+
+    animation-delay: 0.95s;
+}
+
+
+.f7 {
+
+    left: 118px;
+
+    top: 90px;
+
+    animation-delay: 1.1s;
+}
+
+
+.f8 {
+
+    right: 54px;
+
+    top: 118px;
+
+    animation-delay: 1.25s;
+}
+
+
+.f9 {
+
+    left: 118px;
+
+    top: 150px;
+
+    animation-delay: 1.4s;
+}
+
+
+
+/* ============================================
+   TALLOS
+============================================ */
+
+.tallos {
+
+    position: absolute;
+
+    width: 120px;
+
+    height: 170px;
+
+    left: 50%;
+
+    top: 140px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 1;
+}
+
+
+.tallos span {
+
+    width: 5px;
+
+    height: 170px;
+
+    border-radius: 10px;
+
+    position: absolute;
+
+    bottom: 0;
+
+    background:
+        linear-gradient(
+            #70a922,
+            #3b791a
+        );
+
+    transform-origin:
+        bottom;
+}
+
+
+.tallos span:nth-child(1) {
+
+    left: 30px;
+
+    transform: rotate(-17deg);
+}
+
+
+.tallos span:nth-child(2) {
+
+    left: 50px;
+
+    transform: rotate(-8deg);
+}
+
+
+.tallos span:nth-child(3) {
+
+    left: 58px;
+}
+
+
+.tallos span:nth-child(4) {
+
+    right: 45px;
+
+    transform: rotate(8deg);
+}
+
+
+.tallos span:nth-child(5) {
+
+    right: 25px;
+
+    transform: rotate(17deg);
+}
+
+
+
+/* ============================================
+   HOJAS
+============================================ */
+
+.hojas {
+
+    position: absolute;
+
+    top: 165px;
+
+    left: 50%;
+
+    width: 190px;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    font-size: 50px;
+
+    z-index: 2;
+}
+
+
+.hojas span:nth-child(1) {
+
+    transform: rotate(-35deg);
+}
+
+
+.hojas span:nth-child(2) {
+
+    transform:
+        translateY(12px);
+}
+
+
+.hojas span:nth-child(3) {
+
+    transform: rotate(35deg);
+}
+
+
+
+/* ============================================
+   ENVOLTURA
+============================================ */
+
+.envoltura {
+
+    position: absolute;
+
+    width: 175px;
+
+    height: 160px;
+
+    left: 50%;
+
+    bottom: 0;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 4;
+}
+
+
+.papel {
+
+    position: absolute;
+
+    width: 125px;
+
+    height: 150px;
+
+    top: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffbe2,
+            #ffe56e
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(100, 70, 0, 0.12);
+}
+
+
+.papel-izquierdo {
+
+    left: 0;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 25%,
+            75% 100%,
+            38% 100%
+        );
+
+    transform: rotate(6deg);
+}
+
+
+.papel-derecho {
+
+    right: 0;
+
+    clip-path:
+        polygon(
+            0 25%,
+            100% 0,
+            62% 100%,
+            25% 100%
+        );
+
+    transform: rotate(-6deg);
+}
+
+
+.lazo {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 8px;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 48px;
+
+    z-index: 10;
+
+    animation:
+        latido
+        2s
+        infinite;
+}
+
+
+
+/* ============================================
+   MENSAJE FINAL
+============================================ */
+
+.mensaje-final {
+
+    margin-top: 4px;
+
+    font-style: italic;
+
+    color: #80631d;
+}
+
+
+.sorpresa-final h3 {
+
+    margin-top: 18px;
+
+    color: #715200;
+
+    font-size: 1.3rem;
+}
+
+
+
+/* ============================================
+   ELEMENTOS FLOTANTES
+============================================ */
+
+#animaciones {
+
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+
+.flor-flotante,
+.corazon-flotante {
+
+    position: absolute;
+
+    bottom: -70px;
+
+    user-select: none;
+
+    animation:
+        subir
+        linear
+        forwards;
+
+    filter:
+        drop-shadow(
+            0 4px 4px
+            rgba(90, 60, 0, 0.12)
+        );
+}
+
+
+
+/* ============================================
+   BOTÓN MÚSICA
+============================================ */
+
+.boton-musica {
+
+    position: fixed;
+
+    right: 18px;
+
+    bottom: 18px;
+
+    width: 55px;
+
+    height: 55px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff5a5,
+            #ffc928
+        );
+
+    color: #654800;
+
+    box-shadow:
+        0 10px 25px
+        rgba(100, 70, 0, 0.25);
+
+    z-index: 100;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.boton-musica:hover {
+
+    transform: scale(1.08);
+}
+
+
+.boton-musica:active {
+
+    transform: scale(0.94);
+}
+
+
+
+/* Ocultar el reproductor visual */
+
+#youtubePlayer {
+
+    position: fixed;
+
+    width: 1px;
+
+    height: 1px;
+
+    left: -9999px;
+
+    top: -9999px;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+
+/* ============================================
+   ANIMACIONES
+============================================ */
+
+@keyframes aparecer {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.97);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+
+@keyframes flotar {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+    }
+
+    50% {
+
+        transform:
+            translateY(-10px);
+    }
+
+}
+
+
+
+@keyframes latido {
+
+    0%,
+    100% {
+
+        transform:
+            scale(1);
+    }
+
+    50% {
+
+        transform:
+            scale(1.14);
+    }
+
+}
+
+
+
+@keyframes aparecerRamo {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(170px)
+            scale(0.55);
+    }
+
+    65% {
+
+        opacity: 1;
+
+        transform:
+            translateY(-10px)
+            scale(1.04);
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+
+@keyframes florecer {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(0)
+            rotate(-25deg);
+    }
+
+    65% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.18)
+            rotate(5deg);
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0deg);
+    }
+
+}
+
+
+
+@keyframes moverRamo {
+
+    0%,
+    100% {
+
+        transform:
+            rotate(-1deg);
+    }
+
+    50% {
+
+        transform:
+            rotate(1deg);
+    }
+
+}
+
+
+
+@keyframes subir {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    10% {
+
+        opacity: 1;
+    }
+
+    90% {
+
+        opacity: 1;
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-115vh)
+            rotate(360deg);
+    }
+
+}
+
+
+
+/* ============================================
+   CELULAR
+============================================ */
+
+@media (max-width: 600px) {
+
+    .contenedor {
+
+        padding: 14px;
+    }
+
+
+    .inicio {
+
+        width: 100%;
+
+        padding:
+            40px
+            20px;
+
+        border-radius: 26px;
+    }
+
+
+    .mensaje-inicial {
+
+        font-size: 1rem;
+    }
+
+
+    .boton-regalo,
+    .boton-sorpresa {
+
+        width: 100%;
+
+        max-width: 330px;
+
+        padding:
+            16px
+            18px;
+    }
+
+
+    .regalo {
+
+        width: 100%;
+    }
+
+
+    .carta {
+
+        padding:
+            48px
+            20px
+            30px;
+
+        border-radius: 25px;
+    }
+
+
+    .carta p {
+
+        font-size: 1rem;
+
+        line-height: 1.75;
+    }
+
+
+    .sorpresa-final {
+
+        width: 100%;
+
+        padding:
+            34px
+            16px
+            28px;
+
+        border-radius: 27px;
+    }
+
+
+    .sorpresa-final h2 {
+
+        font-size: 2rem;
+    }
+
+
+    .texto-final {
+
+        font-size: 0.98rem;
+
+        line-height: 1.7;
+    }
+
+
+    .ramo-amarillo {
+
+        width: 270px;
+
+        height: 315px;
+
+        margin:
+            12px auto
+            18px;
+
+        transform-origin:
+            bottom center;
+    }
+
+
+    .flor {
+
+        font-size: 55px;
+    }
+
+
+    .f1 {
+
+        left: 8px;
+
+        top: 88px;
+    }
+
+
+    .f2 {
+
+        left: 45px;
+
+        top: 42px;
+    }
+
+
+    .f3 {
+
+        left: 103px;
+
+        top: 8px;
+    }
+
+
+    .f4 {
+
+        right: 43px;
+
+        top: 42px;
+    }
+
+
+    .f5 {
+
+        right: 7px;
+
+        top: 88px;
+    }
+
+
+    .f6 {
+
+        left: 54px;
+
+        top: 107px;
+    }
+
+
+    .f7 {
+
+        left: 107px;
+
+        top: 83px;
+    }
+
+
+    .f8 {
+
+        right: 51px;
+
+        top: 108px;
+    }
+
+
+    .f9 {
+
+        left: 106px;
+
+        top: 139px;
+    }
+
+
+    .envoltura {
+
+        transform:
+            translateX(-50%)
+            scale(0.92);
+
+        transform-origin:
+            bottom center;
+    }
+
+
+    .corazon {
+
+        font-size: 56px;
+    }
+
+
+    .boton-musica {
+
+        right: 14px;
+
+        bottom: 14px;
+
+        width: 52px;
+
+        height: 52px;
+
+        font-size: 22px;
+    }
+
+}
