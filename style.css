@@ -129,12 +129,16 @@ body {
 
 
 .decoracion span:nth-child(2) {
-    animation-delay: 0.3s;
+
+    animation-delay:
+        0.3s;
 }
 
 
 .decoracion span:nth-child(3) {
-    animation-delay: 0.6s;
+
+    animation-delay:
+        0.6s;
 }
 
 
@@ -325,6 +329,8 @@ body {
 }
 
 
+
+/* CARTA */
 
 .carta {
 
@@ -674,15 +680,11 @@ body {
     position: relative;
 
     width: 380px;
-
     height: 390px;
 
-    margin:
-        25px auto
-        5px;
+    margin: 25px auto 5px;
 
-    transform-origin:
-        bottom center;
+    transform-origin: bottom center;
 
     animation:
         aparecerRamo
@@ -692,22 +694,18 @@ body {
 }
 
 
-
 .flores-ramo {
 
     position: absolute;
 
     width: 100%;
-
     height: 260px;
 
     left: 0;
-
     top: 0;
 
     z-index: 5;
 }
-
 
 
 .flor {
@@ -720,18 +718,12 @@ body {
 
     opacity: 0;
 
-    transform:
-        scale(0);
+    transform: scale(0);
 
     filter:
         drop-shadow(
             0 5px 4px
-            rgba(
-                90,
-                60,
-                0,
-                0.12
-            )
+            rgba(90, 60, 0, 0.12)
         );
 
     animation:
@@ -742,8 +734,9 @@ body {
 }
 
 
-
-/* FILA SUPERIOR */
+/* ============================================
+   FILA SUPERIOR
+============================================ */
 
 .f1 {
     left: 45px;
@@ -751,13 +744,11 @@ body {
     animation-delay: 0.1s;
 }
 
-
 .f2 {
     left: 92px;
     top: 40px;
     animation-delay: 0.15s;
 }
-
 
 .f3 {
     left: 156px;
@@ -765,13 +756,11 @@ body {
     animation-delay: 0.2s;
 }
 
-
 .f4 {
     right: 90px;
     top: 42px;
     animation-delay: 0.25s;
 }
-
 
 .f5 {
     right: 38px;
@@ -780,8 +769,9 @@ body {
 }
 
 
-
-/* FILA CENTRAL */
+/* ============================================
+   FILA CENTRAL
+============================================ */
 
 .f6 {
     left: 10px;
@@ -789,13 +779,11 @@ body {
     animation-delay: 0.35s;
 }
 
-
 .f7 {
     left: 68px;
     top: 125px;
     animation-delay: 0.4s;
 }
-
 
 .f8 {
     left: 125px;
@@ -803,20 +791,17 @@ body {
     animation-delay: 0.45s;
 }
 
-
 .f9 {
     right: 125px;
     top: 98px;
     animation-delay: 0.5s;
 }
 
-
 .f10 {
     right: 65px;
     top: 125px;
     animation-delay: 0.55s;
 }
-
 
 .f11 {
     right: 8px;
@@ -825,8 +810,9 @@ body {
 }
 
 
-
-/* FLORES DE RELLENO */
+/* ============================================
+   FLORES INFERIORES / RELLENO
+============================================ */
 
 .f12 {
     left: 50px;
@@ -834,13 +820,11 @@ body {
     animation-delay: 0.65s;
 }
 
-
 .f13 {
     left: 105px;
     top: 165px;
     animation-delay: 0.7s;
 }
-
 
 .f14 {
     left: 158px;
@@ -848,13 +832,11 @@ body {
     animation-delay: 0.75s;
 }
 
-
 .f15 {
     right: 100px;
     top: 165px;
     animation-delay: 0.8s;
 }
-
 
 .f16 {
     right: 45px;
@@ -864,19 +846,17 @@ body {
 
 
 
-/* ============================================
-   HOJAS
-============================================ */
+/* HOJAS */
 
 .relleno-floral {
 
     position: absolute;
 
-    width: 260px;
+    width: 240px;
 
     left: 50%;
 
-    top: 155px;
+    top: 135px;
 
     transform:
         translateX(-50%);
@@ -885,7 +865,7 @@ body {
 
     justify-content: center;
 
-    gap: 4px;
+    gap: 5px;
 
     font-size: 48px;
 
@@ -894,17 +874,15 @@ body {
 
 
 
-/* ============================================
-   PAPEL
-============================================ */
+/* PAPEL */
 
 .papel-ramo {
 
     position: absolute;
 
-    width: 200px;
+    width: 190px;
 
-    height: 175px;
+    height: 165px;
 
     left: 50%;
 
@@ -923,9 +901,9 @@ body {
 
     position: absolute;
 
-    width: 140px;
+    width: 135px;
 
-    height: 170px;
+    height: 160px;
 
     background:
         linear-gradient(
@@ -1103,6 +1081,20 @@ body {
 }
 
 
+
+.boton-musica.cargando {
+
+    opacity: 0.65;
+}
+
+
+
+/*
+   NO usamos display:none.
+   Algunos navegadores móviles son más
+   estrictos con reproductores totalmente
+   ocultos.
+*/
 
 #youtubePlayer {
 
@@ -1413,147 +1405,109 @@ body {
     }
 
 
-    /* RAMO CELULAR */
-
     .ramo-grande {
 
-        width: 320px;
+    width: 320px;
+    height: 350px;
 
-        height: 350px;
-
-        margin:
-            20px auto
-            5px;
-    }
-
-
-    .flor {
-
-        font-size: 58px;
-    }
+    margin:
+        20px auto
+        5px;
+}
 
 
-    .f1 {
-        left: 35px;
-        top: 82px;
-    }
+.flor {
+    font-size: 58px;
+}
 
 
-    .f2 {
-        left: 75px;
-        top: 42px;
-    }
+/* PARTE SUPERIOR */
+
+.f1 {
+    left: 35px;
+    top: 82px;
+}
+
+.f2 {
+    left: 75px;
+    top: 42px;
+}
+
+.f3 {
+    left: 132px;
+    top: 8px;
+}
+
+.f4 {
+    right: 73px;
+    top: 42px;
+}
+
+.f5 {
+    right: 32px;
+    top: 82px;
+}
 
 
-    .f3 {
-        left: 132px;
-        top: 8px;
-    }
+/* CENTRO */
+
+.f6 {
+    left: 5px;
+    top: 132px;
+}
+
+.f7 {
+    left: 53px;
+    top: 115px;
+}
+
+.f8 {
+    left: 103px;
+    top: 90px;
+}
+
+.f9 {
+    right: 103px;
+    top: 92px;
+}
+
+.f10 {
+    right: 52px;
+    top: 115px;
+}
+
+.f11 {
+    right: 5px;
+    top: 132px;
+}
 
 
-    .f4 {
-        right: 73px;
-        top: 42px;
-    }
+/* PARTE INFERIOR */
 
+.f12 {
+    left: 42px;
+    top: 168px;
+}
 
-    .f5 {
-        right: 32px;
-        top: 82px;
-    }
+.f13 {
+    left: 88px;
+    top: 151px;
+}
 
+.f14 {
+    left: 132px;
+    top: 170px;
+}
 
-    .f6 {
-        left: 5px;
-        top: 132px;
-    }
+.f15 {
+    right: 85px;
+    top: 151px;
+}
 
-
-    .f7 {
-        left: 53px;
-        top: 115px;
-    }
-
-
-    .f8 {
-        left: 103px;
-        top: 90px;
-    }
-
-
-    .f9 {
-        right: 103px;
-        top: 92px;
-    }
-
-
-    .f10 {
-        right: 52px;
-        top: 115px;
-    }
-
-
-    .f11 {
-        right: 5px;
-        top: 132px;
-    }
-
-
-    .f12 {
-        left: 42px;
-        top: 168px;
-    }
-
-
-    .f13 {
-        left: 88px;
-        top: 151px;
-    }
-
-
-    .f14 {
-        left: 132px;
-        top: 170px;
-    }
-
-
-    .f15 {
-        right: 85px;
-        top: 151px;
-    }
-
-
-    .f16 {
-        right: 39px;
-        top: 168px;
-    }
-
-
-    .relleno-floral {
-
-        width: 230px;
-
-        top: 145px;
-
-        font-size: 42px;
-    }
-
-
-    .papel-ramo {
-
-        width: 180px;
-
-        height: 160px;
-    }
-
-
-    .papel-izq,
-    .papel-der {
-
-        width: 128px;
-
-        height: 155px;
-    }
+.f16 {
+    right: 39px;
+    top: 168px;
+}
 
 
     .boton-musica {
