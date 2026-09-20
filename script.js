@@ -2,24 +2,6 @@
    ELEMENTOS
 ============================================ */
 
-const botonRegalo =
-    document.getElementById(
-        "botonRegalo"
-    );
-
-
-const botonSorpresa =
-    document.getElementById(
-        "botonSorpresa"
-    );
-
-
-const botonMusica =
-    document.getElementById(
-        "botonMusica"
-    );
-
-
 const inicio =
     document.getElementById(
         "inicio"
@@ -38,6 +20,24 @@ const sorpresaFinal =
     );
 
 
+const botonRegalo =
+    document.getElementById(
+        "botonRegalo"
+    );
+
+
+const botonSorpresa =
+    document.getElementById(
+        "botonSorpresa"
+    );
+
+
+const botonMusica =
+    document.getElementById(
+        "botonMusica"
+    );
+
+
 const animaciones =
     document.getElementById(
         "animaciones"
@@ -46,19 +46,28 @@ const animaciones =
 
 
 /* ============================================
-   VARIABLES DE YOUTUBE
+   CONFIGURACIÓN YOUTUBE
 ============================================ */
 
-let player;
+let player = null;
 
 let youtubeListo = false;
 
 let musicaActiva = false;
 
 
+/*
+    Esta es la PRIMERA canción
+    que estábamos usando.
+*/
+
+const VIDEO_ID =
+    "XNIAdya3zBA";
+
+
 
 /* ============================================
-   CREAR REPRODUCTOR YOUTUBE
+   CUANDO CARGA YOUTUBE
 ============================================ */
 
 function onYouTubeIframeAPIReady() {
@@ -67,12 +76,13 @@ function onYouTubeIframeAPIReady() {
         "youtubePlayer",
         {
 
-            height: "1",
+            width: "200",
 
-            width: "1",
+            height: "113",
 
             videoId:
-                "XNIAdya3zBA",
+                VIDEO_ID,
+
 
             playerVars: {
 
@@ -84,18 +94,17 @@ function onYouTubeIframeAPIReady() {
 
                 fs: 0,
 
-                modestbranding: 1,
-
                 playsinline: 1,
+
+                rel: 0,
 
                 loop: 1,
 
                 playlist:
-                    "XNIAdya3zBA",
-
-                rel: 0
+                    VIDEO_ID
 
             },
+
 
             events: {
 
@@ -104,9 +113,86 @@ function onYouTubeIframeAPIReady() {
 
                         youtubeListo = true;
 
-                        console.log(
-                            "La música está lista 💛"
+                        botonMusica.classList.remove(
+                            "cargando"
                         );
+
+                        botonMusica.textContent =
+                            "🎵";
+
+                        console.log(
+                            "YouTube listo 💛"
+                        );
+
+                    },
+
+
+                onStateChange:
+                    function (event) {
+
+                        /*
+                            1 = reproduciendo
+                            2 = pausado
+                            0 = terminado
+                        */
+
+                        if (
+                            event.data ===
+                            YT.PlayerState.PLAYING
+                        ) {
+
+                            musicaActiva = true;
+
+                            botonMusica.textContent =
+                                "🎵";
+
+                        }
+
+
+                        if (
+                            event.data ===
+                            YT.PlayerState.PAUSED
+                        ) {
+
+                            musicaActiva = false;
+
+                            botonMusica.textContent =
+                                "🔇";
+
+                        }
+
+
+                        /*
+                           Por seguridad, si termina,
+                           vuelve a comenzar.
+                        */
+
+                        if (
+                            event.data ===
+                            YT.PlayerState.ENDED
+                        ) {
+
+                            player.seekTo(
+                                0
+                            );
+
+                            player.playVideo();
+
+                        }
+
+                    },
+
+
+                onError:
+                    function (event) {
+
+                        console.log(
+                            "Error de YouTube:",
+                            event.data
+                        );
+
+                        botonMusica.textContent =
+                            "▶️";
 
                     }
 
@@ -120,56 +206,134 @@ function onYouTubeIframeAPIReady() {
 
 
 /* ============================================
-   FUNCIÓN REPRODUCIR MÚSICA
+   REPRODUCIR
 ============================================ */
 
-function reproducirMusica() {
+function iniciarMusica() {
 
-    if (!youtubeListo || !player) {
+    if (
+        !youtubeListo ||
+        !player
+    ) {
+
+        /*
+           Si YouTube todavía no cargó,
+           mostramos el botón para que
+           pueda tocarlo nuevamente.
+        */
+
+        botonMusica.textContent =
+            "▶️";
+
         return;
     }
 
-    player.playVideo();
 
-    musicaActiva = true;
+    try {
 
-    botonMusica.textContent =
-        "🎵";
+        /*
+           Volumen normal.
+           Puedes bajar 50 a 30 si quieres.
+        */
+
+        player.setVolume(
+            65
+        );
+
+
+        player.unMute();
+
+
+        player.playVideo();
+
+
+        musicaActiva =
+            true;
+
+
+        botonMusica.textContent =
+            "🎵";
+
+
+    } catch (error) {
+
+        console.log(
+            "No se pudo iniciar la música:",
+            error
+        );
+
+
+        botonMusica.textContent =
+            "▶️";
+
+    }
 
 }
 
 
 
 /* ============================================
-   BOTÓN DE MÚSICA
+   PAUSAR
+============================================ */
+
+function pausarMusica() {
+
+    if (
+        !youtubeListo ||
+        !player
+    ) {
+
+        return;
+    }
+
+
+    player.pauseVideo();
+
+
+    musicaActiva =
+        false;
+
+
+    botonMusica.textContent =
+        "🔇";
+
+}
+
+
+
+/* ============================================
+   BOTÓN FLOTANTE DE MÚSICA
 ============================================ */
 
 botonMusica.addEventListener(
     "click",
-    () => {
+    function () {
 
-        if (!youtubeListo || !player) {
+        /*
+            Este toque directo del usuario
+            permite reproducir audio en
+            Chrome / Safari móvil.
+        */
+
+        if (
+            !youtubeListo ||
+            !player
+        ) {
+
+            botonMusica.textContent =
+                "⏳";
+
             return;
         }
 
 
         if (musicaActiva) {
 
-            player.pauseVideo();
-
-            musicaActiva = false;
-
-            botonMusica.textContent =
-                "🔇";
+            pausarMusica();
 
         } else {
 
-            player.playVideo();
-
-            musicaActiva = true;
-
-            botonMusica.textContent =
-                "🎵";
+            iniciarMusica();
 
         }
 
@@ -184,12 +348,15 @@ botonMusica.addEventListener(
 
 botonRegalo.addEventListener(
     "click",
-    () => {
+    function () {
 
-        /* Inicia la música gracias al toque
-           del usuario */
+        /*
+            MUY IMPORTANTE:
+            iniciarMusica() se ejecuta
+            directamente dentro del CLICK.
+        */
 
-        reproducirMusica();
+        iniciarMusica();
 
 
         inicio.style.transition =
@@ -201,11 +368,11 @@ botonRegalo.addEventListener(
 
 
         inicio.style.transform =
-            "scale(0.95)";
+            "scale(0.96)";
 
 
         setTimeout(
-            () => {
+            function () {
 
                 inicio.style.display =
                     "none";
@@ -222,24 +389,11 @@ botonRegalo.addEventListener(
                 });
 
 
-                /* FLORES Y CORAZONES */
+                /*
+                    Flores y confeti al abrir.
+                */
 
-                for (
-                    let i = 0;
-                    i < 20;
-                    i++
-                ) {
-
-                    setTimeout(
-                        () => {
-
-                            crearElementoFlotante();
-
-                        },
-                        i * 130
-                    );
-
-                }
+                crearLluviaSuave();
 
             },
             500
@@ -251,15 +405,22 @@ botonRegalo.addEventListener(
 
 
 /* ============================================
-   ABRIR SORPRESA FINAL
+   PRESIONA AQUÍ
 ============================================ */
 
 botonSorpresa.addEventListener(
     "click",
-    () => {
+    function () {
+
+        /*
+            Explosión de flores
+        */
+
+        crearCelebracion();
+
 
         regalo.style.transition =
-            "opacity 0.5s ease, transform 0.5s ease";
+            "opacity 0.65s ease, transform 0.65s ease";
 
 
         regalo.style.opacity =
@@ -267,11 +428,11 @@ botonSorpresa.addEventListener(
 
 
         regalo.style.transform =
-            "translateY(-20px)";
+            "scale(0.97)";
 
 
         setTimeout(
-            () => {
+            function () {
 
                 regalo.style.display =
                     "none";
@@ -288,70 +449,32 @@ botonSorpresa.addEventListener(
                 });
 
 
-                /* PRIMERA LLUVIA */
-
-                for (
-                    let i = 0;
-                    i < 16;
-                    i++
-                ) {
-
-                    setTimeout(
-                        () => {
-
-                            crearElementoFlotante(
-                                true
-                            );
-
-                        },
-                        i * 130
-                    );
-
-                }
-
-
-                /* SEGUNDA EXPLOSIÓN */
+                /*
+                    Segunda lluvia
+                    alrededor del ramo.
+                */
 
                 setTimeout(
-                    () => {
+                    function () {
 
-                        for (
-                            let i = 0;
-                            i < 25;
-                            i++
-                        ) {
-
-                            setTimeout(
-                                () => {
-
-                                    crearElementoFlotante(
-                                        true
-                                    );
-
-                                },
-                                i * 80
-                            );
-
-                        }
+                        crearCelebracion();
 
                     },
-                    1400
+                    700
                 );
 
 
-                /* DESTELLOS */
-
                 setTimeout(
-                    () => {
+                    function () {
 
-                        crearExplosionDestellos();
+                        crearLluviaSuave();
 
                     },
-                    1000
+                    2000
                 );
 
             },
-            500
+            650
         );
 
     }
@@ -360,112 +483,156 @@ botonSorpresa.addEventListener(
 
 
 /* ============================================
-   FLORES Y CORAZONES
+   CREAR PARTÍCULA
 ============================================ */
 
-function crearElementoFlotante(
+function crearParticula(
     modoFiesta = false
 ) {
 
-    const elemento =
+    const particula =
         document.createElement(
             "span"
         );
 
 
-    const emojis = [
+    /*
+       Flores amarillas + corazones +
+       pequeños brillos.
+    */
+
+    const elementos = [
+
         "🌻",
         "🌻",
         "🌻",
+
         "💛",
         "💛",
-        "✨"
+
+        "🌼",
+
+        "✨",
+
+        "🌻"
+
     ];
 
 
-    const emoji =
-        emojis[
-            Math.floor(
-                Math.random()
-                * emojis.length
-            )
-        ];
-
-
-    elemento.textContent =
-        emoji;
-
-
-    if (emoji === "💛") {
-
-        elemento.classList.add(
-            "corazon-flotante"
+    const indice =
+        Math.floor(
+            Math.random() *
+            elementos.length
         );
 
-    } else {
 
-        elemento.classList.add(
-            "flor-flotante"
-        );
-
-    }
+    particula.textContent =
+        elementos[indice];
 
 
-    elemento.style.left =
-        Math.random()
-        * 100
-        + "vw";
+    particula.classList.add(
+        "particula"
+    );
 
 
-    let tamaño;
+    /*
+        Posición horizontal.
+    */
+
+    particula.style.left =
+        Math.random() *
+        100 +
+        "vw";
+
+
+    /*
+        Tamaño.
+    */
+
+    let tamano;
 
 
     if (modoFiesta) {
 
-        tamaño =
-            Math.random()
-            * 27
-            + 23;
+        tamano =
+            21 +
+            Math.random() *
+            27;
 
     } else {
 
-        tamaño =
-            Math.random()
-            * 20
-            + 18;
+        tamano =
+            16 +
+            Math.random() *
+            18;
 
     }
 
 
-    elemento.style.fontSize =
-        tamaño
-        + "px";
+    particula.style.fontSize =
+        tamano +
+        "px";
 
 
-    const duracion =
-        Math.random()
-        * 4
-        + 5;
+    /*
+        Velocidad.
+    */
+
+    let duracion;
 
 
-    elemento.style.animationDuration =
-        duracion
-        + "s";
+    if (modoFiesta) {
 
+        duracion =
+            3 +
+            Math.random() *
+            2.2;
+
+    } else {
+
+        duracion =
+            5 +
+            Math.random() *
+            3;
+
+    }
+
+
+    particula.style.animationDuration =
+        duracion +
+        "s";
+
+
+    particula.style.animationDelay =
+        Math.random() *
+        0.4 +
+        "s";
+
+
+    /*
+        Añadir.
+    */
 
     animaciones.appendChild(
-        elemento
+        particula
     );
 
 
-    setTimeout(
-        () => {
+    /*
+        Eliminar cuando termina.
+    */
 
-            elemento.remove();
+    setTimeout(
+        function () {
+
+            particula.remove();
 
         },
-        duracion
-        * 1000
+        (
+            duracion +
+            1
+        ) *
+        1000
     );
 
 }
@@ -473,84 +640,27 @@ function crearElementoFlotante(
 
 
 /* ============================================
-   DESTELLOS
+   LLUVIA SUAVE
 ============================================ */
 
-function crearExplosionDestellos() {
+function crearLluviaSuave() {
 
     for (
         let i = 0;
-        i < 18;
+        i < 30;
         i++
     ) {
 
-        const brillo =
-            document.createElement(
-                "span"
-            );
-
-
-        brillo.textContent =
-            "✨";
-
-
-        brillo.style.position =
-            "fixed";
-
-
-        brillo.style.left =
-            (
-                20
-                +
-                Math.random()
-                * 60
-            )
-            + "vw";
-
-
-        brillo.style.top =
-            (
-                20
-                +
-                Math.random()
-                * 55
-            )
-            + "vh";
-
-
-        brillo.style.fontSize =
-            (
-                Math.random()
-                * 18
-                + 15
-            )
-            + "px";
-
-
-        brillo.style.pointerEvents =
-            "none";
-
-
-        brillo.style.zIndex =
-            "50";
-
-
-        brillo.style.animation =
-            "destello 1.3s ease forwards";
-
-
-        document.body.appendChild(
-            brillo
-        );
-
-
         setTimeout(
-            () => {
+            function () {
 
-                brillo.remove();
+                crearParticula(
+                    false
+                );
 
             },
-            1300
+            i *
+            100
         );
 
     }
@@ -560,69 +670,121 @@ function crearExplosionDestellos() {
 
 
 /* ============================================
-   ANIMACIÓN DE DESTELLO
+   EXPLOSIÓN
 ============================================ */
 
-const estilosExtra =
-    document.createElement(
-        "style"
-    );
+function crearCelebracion() {
 
+    for (
+        let i = 0;
+        i < 65;
+        i++
+    ) {
 
-estilosExtra.textContent = `
+        setTimeout(
+            function () {
 
-@keyframes destello {
+                crearParticula(
+                    true
+                );
 
-    0% {
-
-        opacity: 0;
-
-        transform:
-            scale(0)
-            rotate(0deg);
-
-    }
-
-    50% {
-
-        opacity: 1;
-
-        transform:
-            scale(1.4)
-            rotate(180deg);
-
-    }
-
-    100% {
-
-        opacity: 0;
-
-        transform:
-            scale(0.5)
-            rotate(360deg);
+            },
+            i *
+            40
+        );
 
     }
 
 }
 
-`;
 
 
-document.head.appendChild(
-    estilosExtra
+/* ============================================
+   FLORES DE AMBIENTE
+============================================ */
+
+setInterval(
+    function () {
+
+        /*
+            No aparecen en la portada.
+            Empiezan cuando ya abrió
+            el regalo.
+        */
+
+        const regaloVisible =
+            regalo.style.display
+            !== "none"
+            &&
+            !regalo.classList.contains(
+                "oculto"
+            );
+
+
+        const finalVisible =
+            !sorpresaFinal.classList.contains(
+                "oculto"
+            );
+
+
+        if (
+            regaloVisible ||
+            finalVisible
+        ) {
+
+            crearParticula(
+                false
+            );
+
+        }
+
+    },
+    1500
 );
 
 
 
 /* ============================================
-   FLORES AMBIENTALES
+   CUANDO CAMBIA DE PESTAÑA
 ============================================ */
 
-setInterval(
-    () => {
+document.addEventListener(
+    "visibilitychange",
+    function () {
 
-        crearElementoFlotante();
+        /*
+           No hacemos nada especial.
+           Si el navegador pausa YouTube
+           automáticamente, el usuario
+           puede tocar 🎵.
+        */
 
-    },
-    1800
+        if (
+            document.visibilityState
+            === "visible"
+        ) {
+
+            if (
+                youtubeListo &&
+                player &&
+                musicaActiva
+            ) {
+
+                try {
+
+                    player.playVideo();
+
+                } catch (error) {
+
+                    console.log(
+                        error
+                    );
+
+                }
+
+            }
+
+        }
+
+    }
 );
